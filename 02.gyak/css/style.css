@@ -1,0 +1,32 @@
+html{
+    background-color: lightblue;
+    font-size: 25px;
+}
+table{
+    border: 5px solid black;
+    border-collapse: collapse;
+}
+tr,td,th{
+    padding: 2px;
+    margin: 5px;
+}
+table{
+    margin: auto;
+}
+
+p{
+    color: lightgrey;
+}
+.blueClass{
+    color:blue ;
+}
+#important{
+    font-size: 50px;
+    color:red;
+}
+.borderClass{
+    border: 15px dotted black;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
