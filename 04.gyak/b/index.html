@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Feladatok</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .tarolo {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 400px;
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .eredmeny {
+            font-weight: bold;
+            color: #333;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Feladat: Emberek objektum -->
+    <div class="tarolo">
+        <button onclick="emberKiir()">Ember adatainak kiírása</button>
+        <div id="emberDiv" class="eredmeny"></div>
+    </div>
+
+    <!-- 2. Feladat: Véletlen szám -->
+    <div class="tarolo">
+        <button onclick="veletlenSzamKiir()">Véletlen szám generálása</button>
+        <div id="szamDiv" class="eredmeny"></div>
+    </div>
+
+    <!-- 3. Feladat: Autók tömbje listaként -->
+    <div class="tarolo">
+        <button onclick="autokKiir()">Autók listázása</button>
+        <div id="autokDiv" class="eredmeny"></div>
+    </div>
+
+    <!-- 4. Feladat: Aktuális dátum -->
+    <div class="tarolo">
+        <button onclick="datumKiir()">Aktuális dátum kiírása</button>
+        <div id="datumDiv" class="eredmeny"></div>
+    </div>
+
+    <script>
+        // 1. Emberek objektum létrehozása
+        const ember = {
+            nev: "Kovács János",
+            eletkor: 32,
+            lakcim: "1051 Budapest, Fő utca 1."
+        };
+
+        // Függvény az ember adatainak kiírására
+        function emberKiir() {
+            const div = document.getElementById("emberDiv");
+            div.innerHTML = `Név: ${ember.nev}<br>Életkor: ${ember.eletkor} év<br>Lakcím: ${ember.lakcim}`;
+        }
+
+        // 2. Függvény véletlen szám generálására (1 és 100 között)
+        function veletlenSzamKiir() {
+            const div = document.getElementById("szamDiv");
+            const veletlen = Math.floor(Math.random() * 100) + 1;
+            div.innerText = `Generált szám: ${veletlen}`;
+        }
+
+        // 3. Autók tömbje objektumokkal
+        const autok = [
+            { tipus: "Toyota Corolla", szin: "fehér", evjarat: 2019 },
+            { tipus: "Ford Focus", szin: "kék", evjarat: 2016 },
+            { tipus: "Volkswagen Golf", szin: "fekete", evjarat: 2021 },
+            { tipus: "Opel Astra", szin: "piros", evjarat: 2014 }
+        ];
+
+        // Függvény az autók listaként való kiírására
+        function autokKiir() {
+            const div = document.getElementById("autokDiv");
+            let listaHTML = "<ul>";
+            
+            autok.forEach(function(auto) {
+                listaHTML += `<li>${auto.tipus} - Szín: ${auto.szin}, Évjárat: ${auto.evjarat}</li>`;
+            });
+            
+            listaHTML += "</ul>";
+            div.innerHTML = listaHTML;
+        }
+
+        // 4. Függvény az aktuális dátum formázott kiírására
+        function datumKiir() {
+            const div = document.getElementById("datumDiv");
+            const most = new Date();
+            
+            // Magyar formátumra alakítás (pl. 2026. 10. 19. 14:15:30)
+            const formazottDatum = most.toLocaleDateString("hu-HU", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            });
+            
+            div.innerText = `Aktuális idő: ${formazottDatum}`;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munkavállaló Űrlap - jQuery</title>
+    <!-- jQuery betöltése CDN-ről -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f4f9;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .mezo-csoport {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .checkbox-csoport {
+            padding: 8px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .checkbox-csoport label {
+            display: inline-block;
+            font-weight: normal;
+            margin-right: 15px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0069d9;
+        }
+        /* Piros keret a hibás mezőknek */
+        .hiba-keret {
+            border: 2px solid red !important;
+            background-color: #ffe6e6;
+        }
+        /* Hibaüzenetek div formázása */
+        #hibaDiv {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            max-width: 470px;
+            display: none;
+        }
+        .hiba-doboz {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .siker-doboz {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Munkavállalói Űrlap (jQuery)</h2>
+
+    <form id="munkavallaloForm" novalidate>
+        <div class="mezo-csoport">
+            <label for="nev">Név (min. 10 karakter):</label>
+            <input type="text" id="nev">
+        </div>
+
+        <div class="mezo-csoport">
+            <label for="eletkor">Életkor (0 - 120):</label>
+            <input type="number" id="eletkor">
+        </div>
+
+        <div class="mezo-csoport">
+            <label for="munkahely">Munkahely (min. 5 karakter):</label>
+            <input type="text" id="munkahely">
+        </div>
+
+        <div class="mezo-csoport">
+            <label for="fizetes">Fizetés eFt-ban (min. 200):</label>
+            <input type="number" id="fizetes">
+        </div>
+
+        <div class="mezo-csoport">
+            <label for="leiras">Munkaköri leírás (min. 200 karakter):</label>
+            <textarea id="leiras" rows="5"></textarea>
+        </div>
+
+        <div class="mezo-csoport">
+            <label for="vegzettseg">Legmagasabb iskolai végzettség:</label>
+            <select id="vegzettseg">
+                <option value="">-- Kérjük, válasszon! --</option>
+                <option value="altalanos">általános iskola</option>
+                <option value="erettsegi">érettségi</option>
+                <option value="foiskola">főiskola (BSc)</option>
+                <option value="egyetem">egyetem (MSc)</option>
+            </select>
+        </div>
+
+        <div class="mezo-csoport">
+            <label>Nem:</label>
+            <div id="nemTarolo" class="checkbox-csoport">
+                <label><input type="checkbox" id="nemNo" value="no"> Nő</label>
+                <label><input type="checkbox" id="nemFerfi" value="ferfi"> Férfi</label>
+            </div>
+        </div>
+
+        <button type="submit">Küldés és Ellenőrzés</button>
+    </form>
+
+    <!-- Div a hibák kiírására -->
+    <div id="hibaDiv"></div>
+
+    <script>
+        $(document).ready(function() {$("#munkavallaloForm").on("submit", function(event) {
+                event.preventDefault(); // Oldal újratöltésének megakadályozása
+
+                // Minden elemről levesszük a piros keretet egyetlen paranccsal
+                $("input, textarea, select, #nemTarolo").removeClass("hiba-keret");
+
+                let hibak = [];
+
+                // 1. Név ellenőrzése
+                const nevErtek = $("#nev").val().trim();
+                if (nevErtek.length < 10) {
+                    $("#nev").addClass("hiba-keret");
+                    hibak.push("A név megadása kötelező, és legalább 10 karakternek kell lennie!");
+                }
+
+                // 2. Életkor ellenőrzése
+                const korStr = $("#eletkor").val().trim();
+                const korErtek = Number(korStr);
+                if (korStr === "" || isNaN(korErtek) || korErtek < 0 || korErtek > 120) {
+                    $("#eletkor").addClass("hiba-keret");
+                    hibak.push("Az életkor kötelező, és 0, valamint 120 közötti számnak kell lennie!");
+                }
+
+                // 3. Munkahely ellenőrzése
+                const munkahelyErtek = $("#munkahely").val().trim();
+                if (munkahelyErtek.length < 5) {
+                    $("#munkahely").addClass("hiba-keret");
+                    hibak.push("A munkahely megadása kötelező, és legalább 5 karakternek kell lennie!");
+                }
+
+                // 4. Fizetés ellenőrzése
+                const fizetesStr = $("#fizetes").val().trim();
+                const fizetesErtek = Number(fizetesStr);
+                if (fizetesStr === "" || isNaN(fizetesErtek) || fizetesErtek < 200) {
+                    $("#fizetes").addClass("hiba-keret");
+                    hibak.push("A fizetés megadása kötelező, és minimum 200 eFt-nak kell lennie!");
+                }
+
+                // 5. Munkaköri leírás ellenőrzése
+                const leirasErtek = $("#leiras").val().trim();
+                if (leirasErtek.length < 200) {
+                    $("#leiras").addClass("hiba-keret");
+                    hibak.push(`A munkaköri leírás kötelező, és legalább 200 karakternek kell lennie! (Jelenleg: ${leirasErtek.length})`);
+                }
+
+                // 6. Végzettség ellenőrzése
+                if ($("#vegzettseg").val() === "") {
+                    $("#vegzettseg").addClass("hiba-keret");
+                    hibak.push("A legmagasabb iskolai végzettség kiválasztása kötelező!");
+                }
+
+                // 7. Nem ellenőrzése
+                const noPipalva = $("#nemNo").is(":checked");
+                const ferfiPipalva = $("#nemFerfi").is(":checked");
+
+                if (!noPipalva && !ferfiPipalva) {
+                    $("#nemTarolo").addClass("hiba-keret");
+                    hibak.push("A nem kiválasztása kötelező!");
+                } else if (noPipalva && ferfiPipalva) {
+                    $("#nemTarolo").addClass("hiba-keret");
+                    hibak.push("Csak az egyik nemet jelölheti meg!");
+                }
+
+                // Hibák vagy sikeres üzenet megjelenítése
+                const $hibaDiv =$("#hibaDiv");
+                $hibaDiv.removeClass("hiba-doboz siker-doboz").show();
+
+                if (hibak.length > 0) {
+                    $hibaDiv.addClass("hiba-doboz");
+                    let hibaLista = "<strong>Hiba történt az űrlap kitöltésekor:</strong><ul>";
+                    $.each(hibak, function(index, hiba) {
+                        hibaLista += `<li>${hiba}</li>`;
+                    });
+                    hibaLista += "</ul>";
+                    $hibaDiv.html(hibaLista);
+                } else {
+                    $hibaDiv.addClass("siker-doboz");
+                    $hibaDiv.html("<strong>Minden adat megfelelő! Az űrlap sikeresen elküldve.</strong>");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

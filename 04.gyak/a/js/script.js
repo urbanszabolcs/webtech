@@ -1,0 +1,115 @@
+const urlap = document.getElementById('diakUrlap');
+        const sikerUzenet = document.getElementById('siker-uzenet');
+
+        // Mezők és a hozzájuk tartozó hibaüzenet-tárolók
+        const mezok = {
+            nev: document.getElementById('nev'),
+            lakcim: document.getElementById('lakcim'),
+            kor: document.getElementById('kor'),
+            anyjaneve: document.getElementById('anyjaneve'),
+            egyetem: document.getElementById('egyetem'),
+            kar: document.getElementById('kar'),
+            szak: document.getElementById('szak'),
+            diak: document.getElementById('diak'),
+            adat: document.getElementById('adat')
+        };
+
+        function hibaBeallit(mezoId, uzenet) {
+            const mezo = mezok[mezoId];
+            const hibaElem = document.getElementById('hiba-' + mezoId);
+
+            mezo.classList.add('error-border');
+            if (hibaElem) {
+                hibaElem.textContent = uzenet;
+            }
+        }
+
+        function hibaTorol(mezoId) {
+            const mezo = mezok[mezoId];
+            const hibaElem = document.getElementById('hiba-' + mezoId);
+
+            mezo.classList.remove('error-border');
+            if (hibaElem) {
+                hibaElem.textContent = '';
+            }
+        }
+
+        function validalMezo(mezoId) {
+            const mezo = mezok[mezoId];
+            const ertek = mezo.type === 'checkbox' ? '' : mezo.value.trim();
+
+            // 1. Általános üresség-ellenőrzés (egyik sem lehet üres)
+            if (mezo.type !== 'checkbox' && ertek === '') {
+                hibaBeallit(mezoId, 'A mező kitöltése kötelező!');
+                return false;
+            }
+
+            // 2. Életkor ellenőrzése: szám, > 18 és < 100 (19 és 99 között)
+            if (mezoId === 'kor') {
+                const korSzam = Number(ertek);
+                if (isNaN(korSzam) || !Number.isInteger(korSzam)) {
+                    hibaBeallit(mezoId, 'A kor csak egész szám lehet!');
+                    return false;
+                }
+                if (korSzam <= 18 || korSzam >= 100) {
+                    hibaBeallit(mezoId, 'A kornak 18-nál nagyobbnak és 100-nál kisebbnek kell lennie!');
+                    return false;
+                }
+            }
+
+            // 3. Diákigazolvány száma: csak szám, pontosan 11 karakter
+            if (mezoId === 'diak') {
+                const csakSzam = /^[0-9]+$/.test(ertek);
+                if (!csakSzam) {
+                    hibaBeallit(mezoId, 'A diákigazolvány száma csak számokat tartalmazhat!');
+                    return false;
+                }
+                if (ertek.length !== 11) {
+                    hibaBeallit(mezoId, 'A diákigazolvány számának pontosan 11 számjegyből kell állnia!');
+                    return false;
+                }
+            }
+
+            // 4. Adatkezelési checkbox elfogadása
+            if (mezoId === 'adat') {
+                if (!mezo.checked) {
+                    hibaBeallit(mezoId, 'Az adatkezelési szabályzat elfogadása kötelező!');
+                    return false;
+                }
+            }
+
+            // Ha nincs hiba, eltávolítjuk a piros jelzést
+            hibaTorol(mezoId);
+            return true;
+        }
+
+        // Valós idejű hibatörlés és ellenőrzés gépeléskor / módosításkor
+        Object.keys(mezok).forEach(function (mezoId) {
+            const elem = mezok[mezoId];
+            const esemeny = elem.type === 'checkbox' ? 'change' : 'input';
+
+            elem.addEventListener(esemeny, function () {
+                validalMezo(mezoId);
+            });
+        });
+
+        // Űrlap elküldése
+        urlap.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let vanHiba = false;
+
+            Object.keys(mezok).forEach(function (mezoId) {
+                const helyes = validalMezo(mezoId);
+                if (!helyes) {
+                    vanHiba = true;
+                }
+            });
+
+            if (!vanHiba) {
+                sikerUzenet.style.display = 'block';
+            } else {
+                sikerUzenet.style.display = 'none';
+            }
+        });
+        
