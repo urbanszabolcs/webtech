@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Tappancs Menhely - Főoldal</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Követelmény: formázás <style> tag-ben -->
+    <style>
+        .kiemelt-doboz {
+            background-color: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .zold-szoveg {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="fo-fejlec">
+        <h1>Tappancs Állatmenhely</h1>
+        <p>Adj második esélyt egy hűséges társnak!</p>
+    </header>
+
+    <nav class="fomenu">
+        <ul>
+            <li><a href="index.html" class="aktiv">Főoldal</a></li>
+            <li><a href="allataink.html">Állataink</a></li>
+            <li><a href="tamogatas.html">Támogatás</a></li>
+            <li><a href="orokbefogadas.html">Örökbefogadás</a></li>
+        </ul>
+    </nav>
+
+    <div class="kontener">
+        <h2>Üdvözlünk a menhelyünk oldalán!</h2>
+        
+        <!-- Követelmény: style attribútumban formázás (inline CSS) és span -->
+        <p style="font-size: 18px; line-height: 1.6;">
+            Menhelyünk több mint <span class="zold-szoveg">10 éve</span> foglalkozik árva kutyák és macskák mentésével, gyógyításával és gazdihoz juttatásával.
+        </p>
+
+        <div class="kiemelt-doboz">
+            <h3>Miért válassz minket?</h3>
+            <!-- Követelmény: pontozott lista (ul) -->
+            <ul>
+                <li>Minden állatunk oltva és chippelve van.</li>
+                <li>Ingyenes kutyaiskolai tanácsadást biztosítunk.</li>
+                <li>Orvosi garanciát vállalunk a védenceinkre.</li>
+            </ul>
+        </div>
+
+        <h3>Az örökbefogadás menete</h3>
+        <!-- Követelmény: számozott lista (ol) -->
+        <ol>
+            <li>Válaszd ki a szimpatikus kisállatot az Állataink menüpontban.</li>
+            <li>Töltsd ki az online jelentkezési űrlapot.</li>
+            <li>Látogass el hozzánk egy személyes találkozóra.</li>
+            <li>Írd alá az örökbefogadási szerződést, és vidd haza új barátodat!</li>
+        </ol>
+
+        <h3>Menhelyünk életképekben</h3>
+        <!-- Követelmény: képek -->
+        <div class="kepek-tarolo">
+            <img src="kutya1.jpg" alt="Boldog kutya a menhelyen" class="galeria-kep">
+            <img src="kutya2.jpg" alt="Játszó kiskutya" class="galeria-kep">
+        </div>
+    </div>
+
+    <footer id="lablec">
+        <p>&copy; 2026 Tappancs Állatmenhely. Minden jog fenntartva.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Tappancs Menhely - Támogatás</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="fo-fejlec">
+        <h1>Támogasd munkánkat!</h1>
+    </header>
+
+    <nav class="fomenu">
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="allataink.html">Állataink</a></li>
+            <li><a href="tamogatas.html" class="aktiv">Támogatás</a></li>
+            <li><a href="orokbefogadas.html">Örökbefogadás</a></li>
+        </ul>
+    </nav>
+
+    <div class="kontener">
+        <h2>Hogyan segíthetsz?</h2>
+        <p>Adód 1%-ával, tárgyi adományokkal vagy önkéntes munkával is hozzájárulhatsz a menhely fenntartásához. További szakmai cikkeket a <a href="https://hu.wikipedia.org/wiki/Kutya" target="_blank" class="kulso-link">Wikipédia kutya szócikkében</a> olvashatsz.</p>
+
+        <h3>Legutóbbi támogatóink (Dinamikus lista)</h3>
+        <p>Írd be a neved, és add hozzá magad a támogatók falához! (DOM manipuláció: új HTML elem létrehozása)</p>
+        
+        <input type="text" id="uj-tamogato-nev" placeholder="Támogató neve..." style="max-width: 300px; margin-bottom: 10px;">
+        <button id="hozzaad-gomb" class="gomb">Hozzáadás a listához</button>
+
+        <ul id="tamogatok-listaja">
+            <li>Kovács János - 5 000 Ft</li>
+            <li>Szabó Éva - Kutyatáp adomány</li>
+        </ul>
+    </div>
+
+    <footer id="lablec">
+        <p>&copy; 2026 Tappancs Állatmenhely.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

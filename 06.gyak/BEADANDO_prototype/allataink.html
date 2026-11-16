@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Tappancs Menhely - Állataink</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="fo-fejlec">
+        <h1>Gazdira váró védenceink</h1>
+    </header>
+
+    <nav class="fomenu">
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="allataink.html" class="aktiv">Állataink</a></li>
+            <li><a href="tamogatas.html">Támogatás</a></li>
+            <li><a href="orokbefogadas.html">Örökbefogadás</a></li>
+        </ul>
+    </nav>
+
+    <div class="kontener">
+        <h2 id="tablazat-cim">Jelenleg örökbefogadható kutyáink</h2>
+        <p>Kattints a gombra a részletes orvosi tájékoztató megjelenítéséhez vagy elrejtéséhez!</p>
+        
+        <button id="animacio-gomb" class="gomb">Tájékoztató mutatása / elrejtése (Animáció)</button>
+        <button id="cim-modosito-gomb" class="gomb" style="background-color: #0288d1;">Címsor szövegének módosítása</button>
+
+        <div id="animalt-doboz" class="info-panel">
+            <h4>Fontos tudnivalók az egészségügyi állapotról</h4>
+            <p>Minden nálunk lévő kutya átesett a szívféreg-szűrésen, veszettség elleni oltáson és ivartalanításon. Az örökbefogadási díj ezek költségét fedezi.</p>
+        </div>
+
+        <!-- Követelmény: táblázat -->
+        <table class="adat-tablazat">
+            <thead>
+                <tr>
+                    <th>Név</th>
+                    <th>Fajta</th>
+                    <th>Életkor</th>
+                    <th>Nem</th>
+                    <th>Státusz</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bodri</td>
+                    <td>Keverék</td>
+                    <td>2 éves</td>
+                    <td>Kan</td>
+                    <td>Szabad</td>
+                </tr>
+                <tr>
+                    <td>Luna</td>
+                    <td>Labrador</td>
+                    <td>4 éves</td>
+                    <td>Szuka</td>
+                    <td>Szabad</td>
+                </tr>
+                <tr>
+                    <td>Morzsi</td>
+                    <td>Tacskó</td>
+                    <td>1 éves</td>
+                    <td>Kan</td>
+                    <td>Foglalt</td>
+                </tr>
+                <tr>
+                    <td>Bella</td>
+                    <td>Németjuhász</td>
+                    <td>3 éves</td>
+                    <td>Szuka</td>
+                    <td>Szabad</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer id="lablec">
+        <p>&copy; 2026 Tappancs Állatmenhely.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

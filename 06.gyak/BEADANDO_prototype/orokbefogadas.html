@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Tappancs Menhely - Örökbefogadás</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="fo-fejlec">
+        <h1>Örökbefogadási Jelentkezés</h1>
+    </header>
+
+    <nav class="fomenu">
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="allataink.html">Állataink</a></li>
+            <li><a href="tamogatas.html">Támogatás</a></li>
+            <li><a href="orokbefogadas.html" class="aktiv">Örökbefogadás</a></li>
+        </ul>
+    </nav>
+
+    <div class="kontener">
+        <h2>Töltsd ki az alábbi űrlapot!</h2>
+        <p>Minden mező kitöltése kötelező. Hibás kitöltés esetén az űrlap piros kerettel és hibaüzenettel jelzi a problémát.</p>
+
+        <form id="orokbefogil-form" novalidate>
+            <!-- Egysoros szöveges mező -->
+            <div class="form-csoport">
+                <label for="nev">Teljes név:</label>
+                <input type="text" id="nev" name="nev" placeholder="Pl. Nagy Péter">
+                <span class="hiba-uzenet" id="hiba-nev"></span>
+            </div>
+
+            <!-- Egysoros szöveges mező (Email) -->
+            <div class="form-csoport">
+                <label for="email">E-mail cím:</label>
+                <input type="text" id="email" name="email" placeholder="pelda@email.hu">
+                <span class="hiba-uzenet" id="hiba-email"></span>
+            </div>
+
+            <!-- Dátum választás -->
+            <div class="form-csoport">
+                <label for="datum">Tervezett látogatás dátuma:</label>
+                <input type="date" id="datum" name="datum">
+                <span class="hiba-uzenet" id="hiba-datum"></span>
+            </div>
+
+            <!-- Radio button -->
+            <div class="form-csoport">
+                <label>Lakókörnyezet típusa:</label>
+                <label><input type="radio" name="lakas" value="kertes"> Kertes ház</label>
+                <label><input type="radio" name="lakas" value="panellakas"> Társasházi lakás</label>
+                <span class="hiba-uzenet" id="hiba-lakas"></span>
+            </div>
+
+            <!-- Színválasztó -->
+            <div class="form-csoport">
+                <label for="nyakorv-szin">Ajándék nyakörv választott színe:</label>
+                <input type="color" id="nyakorv-szin" name="nyakorv-szin" value="#ff5722">
+            </div>
+
+            <!-- Többsoros szöveges beviteli mező -->
+            <div class="form-csoport">
+                <label for="bemutatkozas">Rövid bemutatkozás és motiváció (min. 10 karakter):</label>
+                <textarea id="bemutatkozas" name="bemutatkozas" rows="4" placeholder="Írj pár mondatot magadról..."></textarea>
+                <span class="hiba-uzenet" id="hiba-bemutatkozas"></span>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="form-csoport">
+                <label>
+                    <input type="checkbox" id="aszf" name="aszf"> Elfogadom az örökbefogadási feltételeket.
+                </label>
+                <span class="hiba-uzenet" id="hiba-aszf"></span>
+            </div>
+
+            <!-- Gombok -->
+            <div class="form-csoport">
+                <button type="submit" class="gomb">Jelentkezés beküldése</button>
+                <button type="reset" class="gomb gomb-masodlagos">Űrlap törlése</button>
+            </div>
+        </form>
+
+        <div id="sikeres-kuldes" style="display:none; background:#c8e6c9; padding:15px; border:2px solid #2e7d32; margin-top:15px;"></div>
+    </div>
+
+    <footer id="lablec">
+        <p>&copy; 2026 Tappancs Állatmenhely.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
